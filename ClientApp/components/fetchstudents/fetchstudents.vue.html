@@ -1,0 +1,34 @@
+<template>
+    <div>
+        <h1>Students</h1>
+
+        <p>This component demonstrates fetching data from the server.</p>
+
+        <table v-if="students.length" class="table">
+            <thead>
+                <tr>
+                    <th>CUI</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in students">
+                    <td>{{ item.cui }}</td>
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p v-else><em>Loading...</em></p>
+        <!-- TODO: put this in another component -->
+        <input v-model="cui" placeholder="CUI">
+        <input v-model="firstName" placeholder="First Name">
+        <input v-model="lastName" placeholder="Last Name">
+        <!--explicitly adding `type="button"` disables the default post on a form-->
+        <button type="button" @click="addStudent">Add student</button>
+    </div>
+</template>
+
+<script src="./fetchstudents.ts"></script>

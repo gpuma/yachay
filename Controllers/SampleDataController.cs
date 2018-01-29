@@ -26,6 +26,27 @@ namespace yachay.Controllers
             });
         }
 
+
+        //TODO: put all student stuff in other controller
+        [HttpGet("[action]")]
+        public IEnumerable<Student> Students()
+        {
+            return new Student[]
+            {
+                new Student { CUI="1234", FirstName = "Gustavo", LastName = "Puma" },
+                new Student { CUI="5678", FirstName = "Bruno", LastName = "García" },
+                new Student { CUI="9101", FirstName = "Arturo", LastName = "Salazar" }
+            };
+        }
+
+        [HttpPost("[action]")]
+        public int PruebaPost([FromBody]Student stu)
+        {
+            int a = 0;
+            a = 47;
+            return a;
+        }
+
         public class WeatherForecast
         {
             public string DateFormatted { get; set; }
@@ -39,6 +60,12 @@ namespace yachay.Controllers
                     return 32 + (int)(TemperatureC / 0.5556);
                 }
             }
+        }
+        public class Student
+        {
+            public string FirstName {get; set;}
+            public string LastName {get; set;}
+            public string CUI {get; set;}
         }
     }
 }
