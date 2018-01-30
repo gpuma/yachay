@@ -11,10 +11,7 @@ interface Student {
 @Component
 export default class FetchStudentsComponent extends Vue {
     students: Student[] = [];
-    firstName: string;
-    lastName: string;
-    cui: string;
-    rpta: number;
+    newStudent: Student = {cui: "", firstName: "", lastName: ""};
     
     mounted() {
         fetch('api/SampleData/Students')
@@ -25,27 +22,13 @@ export default class FetchStudentsComponent extends Vue {
     }
 
     addStudent() {
-        // fetch('api/SampleData/Students')
-        //     .then(response => response.json() as Promise<number>)
-        //     .then(data => {
-        //         this.rpta = data;
-        //     });
-        var data = {
-            // good news, it's not case sensitive!
-            "cui": this.cui,
-            "firstName": this.firstName,
-            "lastName": this.lastName,
-        }
-        console.log(data);
-        //const params = new URLSearchParams();
-        //console.log(params);
         fetch('api/SampleData/PruebaPost', { 
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(this.newStudent),
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(res => res.json())
-            .then(json => console.log(json));
+            .then(res => res.json() as Promise<Student>)
+            .then(newStudent => this.students.push(newStudent));
 
     }
 }

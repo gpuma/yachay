@@ -23,9 +23,9 @@
 
         <p v-else><em>Loading...</em></p>
         <!-- TODO: put this in another component -->
-        <input v-model="cui" placeholder="CUI">
-        <input v-model="firstName" placeholder="First Name">
-        <input v-model="lastName" placeholder="Last Name">
+        <input v-model="newStudent.cui" placeholder="CUI">
+        <input v-model="newStudent.firstName" placeholder="First Name">
+        <input v-model="newStudent.lastName" placeholder="Last Name">
         <!--explicitly adding `type="button"` disables the default post on a form-->
         <button type="button" @click="addStudent">Add student</button>
     </div>

@@ -40,11 +40,9 @@ namespace yachay.Controllers
         }
 
         [HttpPost("[action]")]
-        public int PruebaPost([FromBody]Student stu)
+        public Student PruebaPost([FromBody]Student stu)
         {
-            int a = 0;
-            a = 47;
-            return a;
+            return stu;
         }
 
         public class WeatherForecast
