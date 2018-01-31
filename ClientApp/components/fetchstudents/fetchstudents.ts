@@ -8,14 +8,21 @@ interface Student {
     lastName: string;
 }
 
+interface Blog{
+    blogId: number;
+    url: string;
+}
+
 @Component
 export default class FetchStudentsComponent extends Vue {
-    students: Student[] = [];
-    newStudent: Student = {cui: "", firstName: "", lastName: ""};
+    students: Blog[] = [];
+    //students: Student[] = [];
+    //newStudent: Student = {cui: "", firstName: "", lastName: ""};
+    newStudent: Blog = {blogId: 0, url: ""};
     
     mounted() {
         fetch('api/SampleData/Students')
-            .then(response => response.json() as Promise<Student[]>)
+            .then(response => response.json() as Promise<Blog[]>)
             .then(data => {
                 this.students = data;
             });
@@ -27,7 +34,7 @@ export default class FetchStudentsComponent extends Vue {
             body: JSON.stringify(this.newStudent),
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(res => res.json() as Promise<Student>)
+            .then(res => res.json() as Promise<Blog>)
             .then(newStudent => this.students.push(newStudent));
 
     }

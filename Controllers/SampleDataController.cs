@@ -4,11 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+//TODO: change this to my namespace
+using EFGetStarted.AspNetCore.NewDb.Models;
+
 namespace yachay.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
+        private readonly BloggingContext _context;
+        
+        //TODO: change this
+        public SampleDataController(BloggingContext context)
+        {
+            _context = context;    
+        }
+
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -29,14 +40,16 @@ namespace yachay.Controllers
 
         //TODO: put all student stuff in other controller
         [HttpGet("[action]")]
-        public IEnumerable<Student> Students()
+        public IEnumerable<Blog> Students()
         {
-            return new Student[]
-            {
-                new Student { CUI="1234", FirstName = "Gustavo", LastName = "Puma" },
-                new Student { CUI="5678", FirstName = "Bruno", LastName = "García" },
-                new Student { CUI="9101", FirstName = "Arturo", LastName = "Salazar" }
-            };
+            // return new Student[]
+            // {
+            //     new Student { CUI="1234", FirstName = "Gustavo", LastName = "Puma" },
+            //     new Student { CUI="5678", FirstName = "Bruno", LastName = "García" },
+            //     new Student { CUI="9101", FirstName = "Arturo", LastName = "Salazar" }
+            // };
+            var caca =  _context.Blogs.ToList();
+            return caca;
         }
 
         [HttpPost("[action]")]

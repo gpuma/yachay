@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+// for Entity Framework
+using EFGetStarted.AspNetCore.NewDb.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace yachay
 {
     public class Startup
@@ -22,6 +26,10 @@ namespace yachay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // for Entity Framework
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<BloggingContext>(options => options.UseSqlServer(connection));
+            
             services.AddMvc();
         }
 
