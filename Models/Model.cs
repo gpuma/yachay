@@ -1,33 +1,68 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace EFGetStarted.AspNetCore.NewDb.Models
+namespace yachay.Models
 {
-    public class BloggingContext : DbContext
+    public class YachayContext : DbContext
     {
-        public BloggingContext(DbContextOptions<BloggingContext> options)
+        public YachayContext(DbContextOptions<YachayContext> options)
             : base(options)
         { }
 
-        public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Unit> Units { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+    }
+    public class Unit
+    {
+        public int UnitId { get; set; }
+        public int Name { get; set; }
+        public string Semester { get; set; }
+        public float Weight1 { get; set; }
+        public float Weight2 { get; set; }
+        public float Weight3 { get; set; }
     }
 
-    public class Blog
+    public class Enrollment
     {
-        public int BlogId { get; set; }
-        public string Url { get; set; }
-
-        public List<Post> Posts { get; set; }
+        public int EnrollmentId { get; set; }
+        public int UnitId { get; set; }
+        public int StudentId { get; set; }
+        public int GradeId { get; set; }
     }
 
-    public class Post
+    public class Student
     {
-        public int PostId { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
+        public int StudentId  { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string FirstName  { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string LastName  { get; set; }
+        public List<Grade> Grades { get; set; }
+        public List<Enrollment> Enrollments { get; set; }
+    }
 
-        public int BlogId { get; set; }
-        public Blog Blog { get; set; }
+    public class Grade
+    {
+        public int GradeId { get; set; }
+        [DisplayFormat(NullDisplayText = "No grade")]
+        public float? Grade1 { get; set; }
+        [DisplayFormat(NullDisplayText = "No grade")]
+        public float? Grade2 { get; set; }
+        [DisplayFormat(NullDisplayText = "No grade")]
+        public float? Grade3 { get; set; }
+
+        // // references to unit
+        // //public int UnitId  { get; set; }
+        // public Enrollment Enrollment  { get; set; }
+        
+
+        // // references to student
+        // //public int StudentId { get; set; }
+        // public Student Student { get; set; }
     }
 }

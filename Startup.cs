@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 // for Entity Framework
-using EFGetStarted.AspNetCore.NewDb.Models;
+using yachay.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace yachay
@@ -27,8 +27,8 @@ namespace yachay
         public void ConfigureServices(IServiceCollection services)
         {
             // for Entity Framework
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<BloggingContext>(options => options.UseSqlServer(connection));
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=yachay;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<YachayContext>(options => options.UseSqlServer(connection));
             
             services.AddMvc();
         }

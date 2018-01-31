@@ -4,18 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-//TODO: change this to my namespace
-using EFGetStarted.AspNetCore.NewDb.Models;
+using yachay.Models;
 
 namespace yachay.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private readonly BloggingContext _context;
+        private readonly YachayContext _context;
         
         //TODO: change this
-        public SampleDataController(BloggingContext context)
+        public SampleDataController(YachayContext context)
         {
             _context = context;    
         }
@@ -40,7 +39,7 @@ namespace yachay.Controllers
 
         //TODO: put all student stuff in other controller
         [HttpGet("[action]")]
-        public IEnumerable<Blog> Students()
+        public IEnumerable<Student> Students()
         {
             // return new Student[]
             // {
@@ -48,7 +47,7 @@ namespace yachay.Controllers
             //     new Student { CUI="5678", FirstName = "Bruno", LastName = "García" },
             //     new Student { CUI="9101", FirstName = "Arturo", LastName = "Salazar" }
             // };
-            var caca =  _context.Blogs.ToList();
+            var caca =  _context.Students.ToList();
             return caca;
         }
 
@@ -72,11 +71,11 @@ namespace yachay.Controllers
                 }
             }
         }
-        public class Student
-        {
-            public string FirstName {get; set;}
-            public string LastName {get; set;}
-            public string CUI {get; set;}
-        }
+        // public class Student
+        // {
+        //     public string FirstName {get; set;}
+        //     public string LastName {get; set;}
+        //     public string CUI {get; set;}
+        // }
     }
 }
