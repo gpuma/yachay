@@ -21,13 +21,20 @@
                 </tr>
             </tbody>
         </table>
-
         <p v-else><em>Loading...</em></p>
-        <!-- TODO: put this in another component -->
-        <input v-model="newStudent.firstName" placeholder="First Name">
-        <input v-model="newStudent.lastName" placeholder="Last Name">
-        <!--explicitly adding `type="button"` disables the default post on a form-->
-        <button type="button" @click="addStudent">Add student</button>
+        <form class="form-inline">
+            <div class="form-group">
+                <!-- MAYBE: put this in another component-->
+                <input v-model="newStudent.firstName" placeholder="First Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input v-model="newStudent.lastName" placeholder="Last Name"  class="form-control">
+            </div>
+            <div class="form-group">
+                <!--explicitly adding `type="button"` disables the default post on a form-->
+                <button type="button" @click="addStudent"  class="form-control btn btn-success">Add student</button>
+            </div>
+        </form>
     </div>
 </template>
 
