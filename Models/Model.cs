@@ -18,7 +18,9 @@ namespace yachay.Models
     public class Unit
     {
         public int UnitId { get; set; }
-        public int Name { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; }
+        [StringLength(50)]
         public string Semester { get; set; }
         public float Weight1 { get; set; }
         public float Weight2 { get; set; }
@@ -55,14 +57,5 @@ namespace yachay.Models
         public float? Grade2 { get; set; }
         [DisplayFormat(NullDisplayText = "No grade")]
         public float? Grade3 { get; set; }
-
-        // // references to unit
-        // //public int UnitId  { get; set; }
-        // public Enrollment Enrollment  { get; set; }
-        
-
-        // // references to student
-        // //public int StudentId { get; set; }
-        // public Student Student { get; set; }
     }
 }

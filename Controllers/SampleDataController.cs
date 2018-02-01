@@ -12,12 +12,6 @@ namespace yachay.Controllers
     public class SampleDataController : Controller
     {
         private readonly YachayContext _context;
-        
-        //TODO: change this
-        public SampleDataController(YachayContext context)
-        {
-            _context = context;    
-        }
 
         private static string[] Summaries = new[]
         {
@@ -36,27 +30,6 @@ namespace yachay.Controllers
             });
         }
 
-
-        //TODO: put all student stuff in other controller
-        [HttpGet("[action]")]
-        public IEnumerable<Student> Students()
-        {
-            // return new Student[]
-            // {
-            //     new Student { CUI="1234", FirstName = "Gustavo", LastName = "Puma" },
-            //     new Student { CUI="5678", FirstName = "Bruno", LastName = "García" },
-            //     new Student { CUI="9101", FirstName = "Arturo", LastName = "Salazar" }
-            // };
-            var caca =  _context.Students.ToList();
-            return caca;
-        }
-
-        [HttpPost("[action]")]
-        public Student PruebaPost([FromBody]Student stu)
-        {
-            return stu;
-        }
-
         public class WeatherForecast
         {
             public string DateFormatted { get; set; }
@@ -71,11 +44,5 @@ namespace yachay.Controllers
                 }
             }
         }
-        // public class Student
-        // {
-        //     public string FirstName {get; set;}
-        //     public string LastName {get; set;}
-        //     public string CUI {get; set;}
-        // }
     }
 }

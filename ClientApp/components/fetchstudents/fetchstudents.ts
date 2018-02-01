@@ -3,26 +3,19 @@ import { Component } from 'vue-property-decorator';
 //import { URLSearchParams } from 'url';
 
 interface Student {
-    cui: string;
+    studentId: number;
     firstName: string;
     lastName: string;
 }
 
-interface Blog{
-    blogId: number;
-    url: string;
-}
-
 @Component
 export default class FetchStudentsComponent extends Vue {
-    students: Blog[] = [];
-    //students: Student[] = [];
-    //newStudent: Student = {cui: "", firstName: "", lastName: ""};
-    newStudent: Blog = {blogId: 0, url: ""};
+    students: Student[] = [];
+    newStudent: Student = { studentId: 0, firstName: '', lastName: ''};
     
     mounted() {
-        fetch('api/SampleData/Students')
-            .then(response => response.json() as Promise<Blog[]>)
+        fetch('api/Students/')
+            .then(response => response.json() as Promise<Student[]>)
             .then(data => {
                 this.students = data;
             });
@@ -34,7 +27,7 @@ export default class FetchStudentsComponent extends Vue {
             body: JSON.stringify(this.newStudent),
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(res => res.json() as Promise<Blog>)
+            .then(res => res.json() as Promise<Student>)
             .then(newStudent => this.students.push(newStudent));
 
     }

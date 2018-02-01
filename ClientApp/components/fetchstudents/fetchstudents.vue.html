@@ -7,16 +7,17 @@
         <table v-if="students.length" class="table">
             <thead>
                 <tr>
-                    <th>CUI</th>
+                    <th>Id</th>
                     <th>First Name</th>
+                    <th>Last Name</th>
                     <!-- <th>Last Name</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="item in students">
-                    <td>{{ item.blogId }}</td>
-                    <td>{{ item.url }}</td>
-                    <!-- <td>{{ item.lastName }}</td> -->
+                    <td>{{ item.studentId }}</td>
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
                 </tr>
             </tbody>
         </table>
