@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 using yachay.Models;
 
@@ -25,18 +26,15 @@ namespace yachay.Controllers
             return  _context.Units.ToList();
         }
 
-        [HttpPost("[action]")]
-        //we need `FromBody` since this is a complex type
-        public Student Add([FromBody]Student student)
+        [HttpGet("{id}")]
+        public Unit GetUnit(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return null;
-            }
-
-            _context.Add(student);
-            _context.SaveChanges();
-            return student;
+            var units = _context.Units.Include(u=> u.Enrollments)
+                        .ThenInclude(e => e.Student);
+            // var unit = _context.Units.Find(id);
+            // //explicit loading
+            // _context.Entry(unit).Collection(u => u.Enrollments);
+            return units.First();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace yachay.Models
     {
         public int EnrollmentId { get; set; }
         public int UnitId { get; set; }
-        public int StudentId { get; set; }
+        public Student Student { get; set; }
         
         [DisplayFormat(NullDisplayText = "No grade")]
         public float? Grade1 { get; set; }
@@ -51,6 +51,6 @@ namespace yachay.Models
         [Required]
         [StringLength(50)]
         public string LastName  { get; set; }
-        public List<Enrollment> Enrollments { get; set; }
+        //public List<Enrollment> Enrollments { get; set; }
     }
 }

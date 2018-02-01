@@ -11,9 +11,10 @@ using yachay.Models;
 namespace yachay.Migrations
 {
     [DbContext(typeof(YachayContext))]
-    partial class YachayContextModelSnapshot : ModelSnapshot
+    [Migration("20180201171845_EnrollStudentNav")]
+    partial class EnrollStudentNav
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,7 +88,7 @@ namespace yachay.Migrations
             modelBuilder.Entity("yachay.Models.Enrollment", b =>
                 {
                     b.HasOne("yachay.Models.Student", "Student")
-                        .WithMany()
+                        .WithMany("Enrollments")
                         .HasForeignKey("StudentId");
 
                     b.HasOne("yachay.Models.Unit")
