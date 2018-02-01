@@ -24,5 +24,19 @@ namespace yachay.Controllers
         {
             return  _context.Students.ToList();
         }
+
+        [HttpPost("[action]")]
+        //we need `FromBody` since this is a complex type
+        public Student Add([FromBody]Student student)
+        {
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
+
+            _context.Add(student);
+            _context.SaveChanges();
+            return student;
+        }
     }
 }

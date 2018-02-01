@@ -11,8 +11,6 @@ namespace yachay.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private readonly YachayContext _context;
-
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
