@@ -11,9 +11,10 @@ using yachay.Models;
 namespace yachay.Migrations
 {
     [DbContext(typeof(YachayContext))]
-    partial class YachayContextModelSnapshot : ModelSnapshot
+    [Migration("20180201155531_EnrollmentsByUnit")]
+    partial class EnrollmentsByUnit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,11 +26,7 @@ namespace yachay.Migrations
                     b.Property<int>("EnrollmentId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<float?>("Grade1");
-
-                    b.Property<float?>("Grade2");
-
-                    b.Property<float?>("Grade3");
+                    b.Property<int>("GradeId");
 
                     b.Property<int>("StudentId");
 
@@ -42,6 +39,26 @@ namespace yachay.Migrations
                     b.HasIndex("UnitId");
 
                     b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("yachay.Models.Grade", b =>
+                {
+                    b.Property<int>("GradeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<float?>("Grade1");
+
+                    b.Property<float?>("Grade2");
+
+                    b.Property<float?>("Grade3");
+
+                    b.Property<int?>("StudentId");
+
+                    b.HasKey("GradeId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("yachay.Models.Student", b =>
@@ -95,6 +112,13 @@ namespace yachay.Migrations
                         .WithMany("Enrollments")
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("yachay.Models.Grade", b =>
+                {
+                    b.HasOne("yachay.Models.Student")
+                        .WithMany("Grades")
+                        .HasForeignKey("StudentId");
                 });
 #pragma warning restore 612, 618
         }

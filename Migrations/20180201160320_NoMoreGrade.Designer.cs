@@ -11,9 +11,10 @@ using yachay.Models;
 namespace yachay.Migrations
 {
     [DbContext(typeof(YachayContext))]
-    partial class YachayContextModelSnapshot : ModelSnapshot
+    [Migration("20180201160320_NoMoreGrade")]
+    partial class NoMoreGrade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +31,8 @@ namespace yachay.Migrations
                     b.Property<float?>("Grade2");
 
                     b.Property<float?>("Grade3");
+
+                    b.Property<int>("GradeId");
 
                     b.Property<int>("StudentId");
 

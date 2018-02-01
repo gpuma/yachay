@@ -1,0 +1,27 @@
+<template>
+    <div>
+        <h1>Units</h1>
+
+        <p>This component demonstrates fetching data from the server.</p>
+
+        <table v-if="units.length" class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Semester</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in units">
+                    <td>{{ item.unitId }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.semester }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p v-else><em>Loading...</em></p>
+    </div>
+</template>
+
+<script src="./fetchunits.ts"></script>

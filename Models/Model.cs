@@ -13,8 +13,8 @@ namespace yachay.Models
         public DbSet<Unit> Units { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Grade> Grades { get; set; }
     }
+
     public class Unit
     {
         public int UnitId { get; set; }
@@ -25,6 +25,7 @@ namespace yachay.Models
         public float Weight1 { get; set; }
         public float Weight2 { get; set; }
         public float Weight3 { get; set; }
+        public List<Enrollment> Enrollments { get; set; }
     }
 
     public class Enrollment
@@ -32,7 +33,13 @@ namespace yachay.Models
         public int EnrollmentId { get; set; }
         public int UnitId { get; set; }
         public int StudentId { get; set; }
-        public int GradeId { get; set; }
+        
+        [DisplayFormat(NullDisplayText = "No grade")]
+        public float? Grade1 { get; set; }
+        [DisplayFormat(NullDisplayText = "No grade")]
+        public float? Grade2 { get; set; }
+        [DisplayFormat(NullDisplayText = "No grade")]
+        public float? Grade3 { get; set; }
     }
 
     public class Student
@@ -44,18 +51,6 @@ namespace yachay.Models
         [Required]
         [StringLength(50)]
         public string LastName  { get; set; }
-        public List<Grade> Grades { get; set; }
         public List<Enrollment> Enrollments { get; set; }
-    }
-
-    public class Grade
-    {
-        public int GradeId { get; set; }
-        [DisplayFormat(NullDisplayText = "No grade")]
-        public float? Grade1 { get; set; }
-        [DisplayFormat(NullDisplayText = "No grade")]
-        public float? Grade2 { get; set; }
-        [DisplayFormat(NullDisplayText = "No grade")]
-        public float? Grade3 { get; set; }
     }
 }
