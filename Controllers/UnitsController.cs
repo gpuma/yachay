@@ -29,12 +29,15 @@ namespace yachay.Controllers
         [HttpGet("{id}")]
         public Unit GetUnit(int id)
         {
-            var units = _context.Units.Include(u=> u.Enrollments)
-                        .ThenInclude(e => e.Student);
-            // var unit = _context.Units.Find(id);
-            // //explicit loading
-            // _context.Entry(unit).Collection(u => u.Enrollments);
-            return units.First();
+            var unit = _context.Units.Find(id);
+            if (unit != null)
+            {
+                // explicit loading (kind of)
+                // source: https://stackoverflow.com/a/41535211/344162
+                _context.Entry(unit).Collection(u => u.Enrollments)
+                    .Query().Include(e => e.Student).Load();
+            }
+            return unit;
         }
     }
 }
