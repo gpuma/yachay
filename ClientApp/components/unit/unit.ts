@@ -14,7 +14,9 @@ export default class UnitComponent extends Vue {
     // used to detect changes to the grades
     // since loading the data for the first time will trigger
     // the watch property, we will initialize, it starts as -1
-    changes = -1;
+    changes: number = -1;
+    lastOperationReturnCode: number = 1;
+    
     mounted() {
         fetch('api/units/'+this.$route.params.id)
             .then(response => response.json() as Promise<Unit>)
@@ -32,7 +34,6 @@ export default class UnitComponent extends Vue {
         if(this.changes == 0){
             this.initialState = this.copyState();
         }
-        console.log(this.changes);
     }
 
     revertChanges(){
@@ -41,8 +42,30 @@ export default class UnitComponent extends Vue {
         this.changes = -1;
     }
 
+    get successfulSave(){
+        return this.lastOperationReturnCode == 0;
+    }
+
+    get failedSave(){
+        return this.lastOperationReturnCode == -1;
+    }
+
     applyChanges(){
-        //TODO: implement persistence
+        fetch('api/units/Update', { 
+            method: 'POST',
+            body: JSON.stringify(this.unit),
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json() as Promise<number>)
+            .then(returnCode => {
+                if(returnCode == 0){
+                    this.lastOperationReturnCode = 0;
+                    this.initialState = this.unit.enrollments
+                    this.changes = -1;
+                }
+            }, () => this.lastOperationReturnCode = -1)
+
+        
     }
 
     get IsThereChanges(){

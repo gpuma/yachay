@@ -39,5 +39,20 @@ namespace yachay.Controllers
             }
             return unit;
         }
+
+        [HttpPost("[action]")]
+        //we need `FromBody` since this is a complex type
+        public int Update([FromBody]Unit unit)
+        {
+            //TODO: check this
+            if (!ModelState.IsValid)
+            {
+                return -1;
+            }
+
+            _context.Update(unit);
+            _context.SaveChanges();
+            return 0;
+        }
     }
 }
