@@ -4,3 +4,16 @@
         padding-top: 50px;
     }
 }
+
+input.grade {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+}
+
+td.grade {
+    margin: 0;
+    padding: 0;
+}

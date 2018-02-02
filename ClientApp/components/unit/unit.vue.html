@@ -6,7 +6,8 @@
              {{unit.weight2}} and {{unit.weight3}}, respectively.</p>
         <p><router-link to="/units/">Go back to all units</router-link></p>
         <p v-if="unit.enrollments.length==0"><em>No students enrolled in this class.</em></p>
-        <table v-else-if="unit.enrollments" class="table table-condensed table-striped">
+        <div v-else-if="unit.enrollments">
+        <table  class="table table-condensed table-striped">
             <thead>
                 <tr>
                     <th>Student Id</th>
@@ -27,10 +28,12 @@
                     <td v-else><em>No grade...</em></td>
                     <td v-if="item.grade3">{{ item.grade3 }}</td>
                     <td v-else><em>No grade...</em></td>
-                    <td>{{ weightedAvg(item) }} </td>
+                    <td>{{ formatDecimal(weightedAvg(item), 1) }} </td>
                 </tr>
             </tbody>
         </table>
+        <p>The class average is: {{formatDecimal(unitAvg(), 2)}}</p>
+        </div>
         <p v-else><em>Loading...</em></p>
     </div>
 </template>
