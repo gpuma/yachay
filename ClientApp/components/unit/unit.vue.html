@@ -1,10 +1,11 @@
 <template>
     <div>
-        <h1>Students enrolled in Unit {{ $route.params.id }}</h1>
+        <h1>Students enrolled in {{unit.name}}</h1>
 
-        <p>This component demonstrates fetching data from the server.</p>
+        <p>The weights for each grade are {{unit.weight1}},
+             {{unit.weight2}} and {{unit.weight3}}, respectively.</p>
         <p v-if="unit.enrollments.length==0"><em>No students enrolled in this class.</em></p>
-        <table v-else-if="unit.enrollments" class="table">
+        <table v-else-if="unit.enrollments" class="table table-condensed table-striped">
             <thead>
                 <tr>
                     <th>Student Id</th>
@@ -12,6 +13,7 @@
                     <th>Grade 1</th>
                     <th>Grade 2</th>
                     <th>Grade 3</th>
+                    <th>Final Grade</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +26,7 @@
                     <td v-else><em>No grade...</em></td>
                     <td v-if="item.grade3">{{ item.grade3 }}</td>
                     <td v-else><em>No grade...</em></td>
+                    <td>{{ weightedAvg(item) }} </td>
                 </tr>
             </tbody>
         </table>
