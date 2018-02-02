@@ -1,9 +1,10 @@
 <template>
     <div>
         <h1>Students enrolled in {{unit.name}}</h1>
-
+        
         <p>The weights for each grade are {{unit.weight1}},
              {{unit.weight2}} and {{unit.weight3}}, respectively.</p>
+        <p><router-link to="/units/">Go back to all units</router-link></p>
         <p v-if="unit.enrollments.length==0"><em>No students enrolled in this class.</em></p>
         <table v-else-if="unit.enrollments" class="table table-condensed table-striped">
             <thead>
