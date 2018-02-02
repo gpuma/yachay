@@ -1,28 +1,20 @@
 import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 
-//kind of a hack but there's not enough documentation 
-interface Unit { 
-    name: string;
-    weight1: number;
-    weight2: number;
-    weight3: number;
-    enrollments: Enrollment[];
-}
-interface Enrollment { 
-    grade1: number;
-    grade2: number;
-    grade3: number;
-}
+import { Unit, Enrollment, Student } from '../models';
 
 @Component
 export default class UnitComponent extends Vue {
     //type assertions to avoid building an empty object
     //since it will be replaced anyways by the fetched data
     //this will remove "undefined property warnings" by Vue
-    unit = <Unit>{ enrollments: <Enrollment[]>{} };
-    currentEnrollment = <Enrollment> {};
-    
+    unit = <Unit>{ enrollments: <Enrollment[]>{ } };
+    initialState = <Enrollment[]>{};
+    currentEnrollment = <Enrollment> { student: <Student>{} };
+    // used to detect changes to the grades
+    // since loading the data for the first time will trigger
+    // the watch property, we will initialize, it starts as -1
+    changes = -1;
     mounted() {
         fetch('api/units/'+this.$route.params.id)
             .then(response => response.json() as Promise<Unit>)
@@ -34,10 +26,42 @@ export default class UnitComponent extends Vue {
             });
     }
 
+    @Watch('unit.enrollments', { deep: true } )
+    onUnitChange(val: Enrollment[], oldVal: Enrollment[]){
+        this.changes += 1;
+        if(this.changes == 0){
+            this.initialState = this.copyState();
+        }
+        console.log(this.changes);
+    }
 
+    revertChanges(){
+        this.unit.enrollments = this.initialState;
+        //onUnitChange will change this to 0, which = no changes
+        this.changes = -1;
+    }
+
+    applyChanges(){
+        //TODO: implement persistence
+    }
+
+    get IsThereChanges(){
+        return this.changes > 0;
+    }
+
+    // returns a deep copy of the unit.Enrollments array
+    // for state-keeping purposes
+    copyState(){
+        return this.unit.enrollments.map(obj => ({...obj}));
+    }
+
+    //MAYBE: add 
     editEnrollment(index: number){
         this.currentEnrollment = this.unit.enrollments[index];
-        console.log("you clicked", index);
+    }
+
+    fullName(s: Student){
+        return s.firstName + ' ' + s.lastName;
     }
 
     //weighted average per Enrollment
@@ -46,7 +70,6 @@ export default class UnitComponent extends Vue {
             e.grade2 * this.unit.weight2 +
             e.grade3 * this.unit.weight3;
 
-        //one decimal place
         return wAvg;
     }
 

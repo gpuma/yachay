@@ -22,7 +22,7 @@
             <tbody>
                 <tr v-for="(item, index) in unit.enrollments">
                     <td>{{ item.student.studentId }}</td>
-                    <td>{{ item.student.firstName + ' ' + item.student.lastName }}</td>
+                    <td>{{ fullName(item.student) }}</td>
                     <td v-if="item.grade1">{{ item.grade1 }}</td>
                     <td v-else><em>No grade...</em></td>
                     <td v-if="item.grade2">{{ item.grade2 }}</td>
@@ -30,28 +30,49 @@
                     <td v-if="item.grade3">{{ item.grade3 }}</td>
                     <td v-else><em>No grade...</em></td>
                     <td>{{ formatDecimal(weightedAvg(item), 1) }} </td>
-                    <td><button type="button" @click="editEnrollment(index)" class="btn" data-toggle="modal" data-target="#myModal">Edit Row {{index}}</button></td>
+                    <td><button type="button" @click="editEnrollment(index)" class="btn btn-primary"
+                         data-toggle="modal" data-target="#editGradeModal">Edit grades...</button></td>
                 </tr>
             </tbody>
         </table>
         <p>The class average is: {{formatDecimal(unitAvg(), 2)}}</p>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Launch demo modal
-        </button>
+        <button type="button" @click="applyChanges()" class="btn btn-success" :disabled="!IsThereChanges">Save changes</button>        
+        <button type="button" @click="revertChanges()" class="btn btn-danger" :disabled="!IsThereChanges" >Discard</button>
         <!-- Modal -->
-        <div v-if="currentEnrollment" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!-- TODO: there's probably a way to modularize this. right now it's a bit ugly and difficult to maintain -->
+        <div v-if="currentEnrollment" class="modal fade" id="editGradeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">
+                    Editing {{fullName(currentEnrollment.student)}}'s grades
+                </h4>
                 </div>
                 <div class="modal-body">
-                    {{currentEnrollment.student.firstName}}
+                    <form class="form-inline edit-grades">
+                    <div class="form-group">
+                        <label>Grade 1</label>
+                        <input v-model="currentEnrollment.grade1" class="form-control grade">
+                    </div>
+                    <div class="form-group">
+                        <label>Grade 2</label>
+                        <input v-model="currentEnrollment.grade2" class="form-control grade">
+                    </div>
+                    <div class="form-group">
+                        <label>Grade 3</label>
+                        <input v-model="currentEnrollment.grade3" class="form-control grade">
+                    </div>
+                    <div class="form-group">
+                        <label>Weighted Avg.:</label>
+                        <span type="text" class="form-control grade" readonly>
+                            {{ formatDecimal(weightedAvg(currentEnrollment), 1) }}
+                        </span>
+                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
             </div>

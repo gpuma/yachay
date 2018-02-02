@@ -1,11 +1,6 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-
-interface Student {
-    studentId: number;
-    firstName: string;
-    lastName: string;
-}
+import { Student } from '../models'
 
 @Component
 export default class FetchStudentsComponent extends Vue {
