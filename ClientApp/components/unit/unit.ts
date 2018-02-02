@@ -17,16 +17,27 @@ interface Enrollment {
 
 @Component
 export default class UnitComponent extends Vue {
-    //type assertion to avoid building an empty object
+    //type assertions to avoid building an empty object
     //since it will be replaced anyways by the fetched data
-    unit = <Unit>{}
-
+    //this will remove "undefined property warnings" by Vue
+    unit = <Unit>{ enrollments: <Enrollment[]>{} };
+    currentEnrollment = <Enrollment> {};
+    
     mounted() {
         fetch('api/units/'+this.$route.params.id)
             .then(response => response.json() as Promise<Unit>)
             .then(data => {
                 this.unit = data;
+                // to avoid errors, the current enrollment will be the first
+                // TODO: check if null would be better
+                this.currentEnrollment = this.unit.enrollments[0];
             });
+    }
+
+
+    editEnrollment(index: number){
+        this.currentEnrollment = this.unit.enrollments[index];
+        console.log("you clicked", index);
     }
 
     //weighted average per Enrollment
