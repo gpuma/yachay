@@ -6,7 +6,9 @@ export interface Student {
 }
 
 export interface Unit { 
+    unitId: number;
     name: string;
+    semester: string;
     weight1: number;
     weight2: number;
     weight3: number;

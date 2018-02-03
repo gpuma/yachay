@@ -17,7 +17,6 @@ export default class FetchStudentsComponent extends Vue {
     }
 
     addStudent() {
-        
         fetch('api/Students/Add', { 
             method: 'POST',
             body: JSON.stringify(this.newStudent),

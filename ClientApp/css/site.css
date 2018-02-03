@@ -5,6 +5,10 @@
     }
 }
 
-.form-inline .form-group .grade {
+.form-inline .form-group .small-num {
     width:50px;
+}
+
+.form-inline .form-group .weight {
+    width:90px;
 }

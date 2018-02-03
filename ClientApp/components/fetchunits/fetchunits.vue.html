@@ -27,6 +27,29 @@
             </tbody>
         </table>
         <p v-else><em>Loading...</em></p>
+        <h2>New unit</h2>
+        <form class="form-inline">
+            <div class="form-group">
+                <!-- MAYBE: put this in another component-->
+                <input v-model="newUnit.name" placeholder="Unit name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input v-model="newUnit.semester" placeholder="Semester"  class="form-control">
+            </div>
+            <div class="form-group">
+                <input v-model="newUnit.weight1" placeholder="Weight 1"  class="form-control weight">
+            </div>
+            <div class="form-group">
+                <input v-model="newUnit.weight2" placeholder="Weight 2"  class="form-control weight">
+            </div>
+            <div class="form-group">
+                <input v-model="newUnit.weight3" placeholder="Weight 3"  class="form-control weight">
+            </div>
+            <div class="form-group">
+                <!--explicitly adding `type="button"` disables the default post on a form-->
+                <button type="button" @click="addUnit"  class="form-control btn btn-success">Add unit</button>
+            </div>
+        </form>
     </div>
 </template>
 

@@ -41,7 +41,6 @@ namespace yachay.Controllers
         }
 
         [HttpPost("[action]")]
-        //we need `FromBody` since this is a complex type
         public int Update([FromBody]Unit unit)
         {
             //TODO: check this
@@ -53,6 +52,19 @@ namespace yachay.Controllers
             _context.Update(unit);
             _context.SaveChanges();
             return 0;
+        }
+        
+        [HttpPost("[action]")]
+        public Unit Add([FromBody]Unit unit)
+        {
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
+
+            _context.Add(unit);
+            _context.SaveChanges();
+            return unit;
         }
     }
 }
