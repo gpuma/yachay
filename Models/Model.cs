@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+//for [NotMapped]
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace yachay.Models
 {
@@ -52,6 +54,9 @@ namespace yachay.Models
         [Required]
         [StringLength(50)]
         public string LastName  { get; set; }
-        //public List<Enrollment> Enrollments { get; set; }
+
+        //used for client purposes
+        [NotMapped]
+        public bool Enroll {get; set; }
     }
 }

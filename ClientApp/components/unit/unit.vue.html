@@ -12,9 +12,10 @@
         <p>The weights for each grade are {{unit.weight1}},
              {{unit.weight2}} and {{unit.weight3}}, respectively.</p>
         <p><router-link to="/units/">Go back to all units</router-link></p>
+        <p><router-link :to="'/units/' + unit.unitId + '/enroll'" >Enroll more students...</router-link></p>        
         <p v-if="unit.enrollments.length==0"><em>No students enrolled in this class.</em></p>
         <div v-else-if="unit.enrollments">
-        <table  class="table table-condensed table-striped">
+        <table class="table table-condensed table-striped">
             <thead>
                 <tr>
                     <th>Student Id</th>

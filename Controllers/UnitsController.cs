@@ -83,12 +83,19 @@ namespace yachay.Controllers
             return _context.Students.Where(s => !enrolledStudents.Contains(s.StudentId) );
         }
 
-        [HttpPost("{id}/[action]")]
-        //displays a list of available students
-        //to be enrolled in the specifid unit
-        public Unit ConfirmEnrollment([FromBody]IEnumerable<Student> students)
+        [HttpPost("{unitId}/[action]")]
+        //enrolls the list of students to the specified unit
+        public int ConfirmEnrollment(int unitId, [FromBody]IEnumerable<Student> students)
         {
-            throw new NotImplementedException();
+            //we do not add the `Student` reference since that will
+            //make EF think that we're creating new students
+            var newEnrollments = (
+                from s in students
+                select new Enrollment() { UnitId = unitId, StudentId = s.StudentId}
+            ).AsEnumerable().ToList();
+            _context.Enrollments.AddRange(newEnrollments);
+            _context.SaveChanges();
+            return 0;
         }
     }
 }

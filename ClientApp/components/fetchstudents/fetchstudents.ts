@@ -5,7 +5,7 @@ import { Student } from '../models'
 @Component
 export default class FetchStudentsComponent extends Vue {
     students: Student[] = [];
-    newStudent: Student = { studentId: 0, firstName: '', lastName: ''};
+    newStudent  = <Student>{};
     succesfulAdd: boolean = false;
     
     mounted() {

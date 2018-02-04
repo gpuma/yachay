@@ -3,6 +3,8 @@ export interface Student {
     studentId: number;
     firstName: string;
     lastName: string;
+    // used for enrollments
+    enroll: boolean;
 }
 
 export interface Unit { 

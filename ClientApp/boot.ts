@@ -11,6 +11,7 @@ const routes = [
     { path: '/students', component: require('./components/fetchstudents/fetchstudents.vue.html') },
     { path: '/units', component: require('./components/fetchunits/fetchunits.vue.html') },
     { path: '/units/:id', component: require('./components/unit/unit.vue.html') },
+    { path: '/units/:id/enroll', component: require('./components/enrollstudents/enrollstudents.vue.html') },
 ];
 
 new Vue({

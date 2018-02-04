@@ -17,7 +17,13 @@ insert into Enrollments values(3,1,NULL,NULL,NULL)
 insert into Enrollments values(4,1,NULL,NULL,NULL)
 insert into Enrollments values(6,1,20,20,20)
 
-select * from Students
+select * from Enrollments
+
+delete from Units
+where unitid > 4
+
+delete from Students
+where studentid > 6
 
 update Enrollments
 set Grade3 = ABS(CHECKSUM(NewId())) % 20

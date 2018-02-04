@@ -64,8 +64,6 @@ export default class UnitComponent extends Vue {
                     this.changes = -1;
                 }
             }, () => this.lastOperationReturnCode = -1)
-
-        
     }
 
     get IsThereChanges(){
