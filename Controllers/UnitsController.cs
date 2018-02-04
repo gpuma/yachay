@@ -66,5 +66,29 @@ namespace yachay.Controllers
             _context.SaveChanges();
             return unit;
         }
+
+        [HttpGet("{unitId}/[action]")]
+        //displays a list of available students
+        //to be enrolled in the specifid unit
+        public IEnumerable<Student> Enroll(int unitId)
+        {
+            var currentUnit = this.GetUnit(unitId);
+            //we obtain the list of the ids of the students
+            //currently enrolled in the unit to filter them out
+            var enrolledStudents = 
+                (from e in currentUnit.Enrollments
+                select e.StudentId).AsEnumerable();
+            
+            //display only students not enrolled in this unit
+            return _context.Students.Where(s => !enrolledStudents.Contains(s.StudentId) );
+        }
+
+        [HttpPost("{id}/[action]")]
+        //displays a list of available students
+        //to be enrolled in the specifid unit
+        public Unit ConfirmEnrollment([FromBody]IEnumerable<Student> students)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace yachay.Models
     {
         public int EnrollmentId { get; set; }
         public int UnitId { get; set; }
+        public int StudentId { get; set; }
         public Student Student { get; set; }
         
         [DisplayFormat(NullDisplayText = "No grade")]
