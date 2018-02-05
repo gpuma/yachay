@@ -2,7 +2,10 @@ import './css/site.css';
 import 'bootstrap';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Snotify from 'vue-snotify'; 
+
 Vue.use(VueRouter);
+Vue.use(Snotify);
 
 const routes = [
     { path: '/', component: require('./components/home/home.vue.html') },
@@ -14,7 +17,6 @@ const routes = [
     { path: '/units/:id/enroll', component: require('./components/enrollstudents/enrollstudents.vue.html') },
 ];
 
-Vue.component('toast', require('./components/toast/toast.vue.html'));
 new Vue({
     el: '#app-root',
     router: new VueRouter({ mode: 'history', routes: routes }),

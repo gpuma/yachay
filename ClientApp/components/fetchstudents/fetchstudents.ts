@@ -26,8 +26,12 @@ export default class FetchStudentsComponent extends Vue {
             .then(newStudent => {
                 this.students.push(newStudent) 
                 //TODO: clear controls after post HERE
-                return true
-                //TODO: add feedback to user after error
+                this.$snotify.success('Example body content', {
+                    timeout: 2000,
+                    showProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true
+                  });
             }, () => console.log('error papi'))
     }
 }

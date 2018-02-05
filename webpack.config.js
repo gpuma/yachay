@@ -10,7 +10,12 @@ module.exports = (env) => {
     return [{
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: [ '.js', '.ts' ] },
+        resolve: { 
+            extensions: [ '.js', '.ts' ], 
+            alias: {
+                vue$: 'vue/dist/vue.esm.js'
+            } 
+        },
         entry: { 'main': './ClientApp/boot.ts' },
         module: {
             rules: [
