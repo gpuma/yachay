@@ -14,8 +14,9 @@ const routes = [
     { path: '/units/:id/enroll', component: require('./components/enrollstudents/enrollstudents.vue.html') },
 ];
 
+Vue.component('toast', require('./components/toast/toast.vue.html'));
 new Vue({
     el: '#app-root',
     router: new VueRouter({ mode: 'history', routes: routes }),
-    render: h => h(require('./components/app/app.vue.html'))
+    render: h => h(require('./components/app/app.vue.html')),
 });
