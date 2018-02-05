@@ -1,13 +1,11 @@
 <template>
     <div>
-        <div v-if="successfulSave" class="alert alert-success alert-dismissable " >
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success!</strong> Changes were updated correctly.
+        <div v-if="successfulSave">
+            <toast msgType="ok" msg="Success! Changes were updated correctly."/>
         </div>
-        <div v-if="failedSave" class="alert alert-danger alert-dismissable " >
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Oops!</strong> Something went wrong. Please try again.
-            </div>
+        <div v-if="failedSave">
+            <toast msgType="error" msg="Oops! Something went wrong. Please try again"/>
+        </div>
         <h1>Students enrolled in {{unit.name}}</h1>
         <p>The weights for each grade are {{unit.weight1}},
              {{unit.weight2}} and {{unit.weight3}}, respectively.</p>

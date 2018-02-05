@@ -1,3 +1,14 @@
 <template>
-    <h1>HOLA AMIGO</h1>
+    <div>
+        <div v-if="successfulSave" class="alert alert-success alert-dismissable " >
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <!--TODO: no all text should be strong-->
+            <strong>{{msg}}</strong>
+        </div>
+        <div v-if="failedSave" class="alert alert-danger alert-dismissable " >
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{msg}}</strong>
+        </div>
+    </div>
 </template>
+<script src="./toast.ts"></script>
