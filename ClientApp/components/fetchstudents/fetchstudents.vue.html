@@ -3,8 +3,8 @@
         <h1>Students</h1>
         <vue-snotify></vue-snotify>
         <p>Here you can see the existing students and add more.</p>
-
-        <table v-if="students.length" class="table">
+        <p v-if="students.length==0"><em>There's currently no students registered. Why not add some?</em></p>
+        <table v-else-if="students.length" class="table">
             <thead>
                 <tr>
                     <th>Id</th>

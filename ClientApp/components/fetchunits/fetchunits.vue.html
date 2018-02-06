@@ -4,8 +4,8 @@
         <h1>Units</h1>
 
         <p>Here you can see the existing units and add more.</p>
-
-        <table v-if="units.length" class="table">
+        <p v-if="units.length==0"><em>There's currently no units registered. Why not add some?</em></p>
+        <table v-else-if="units.length" class="table">
             <thead>
                 <tr>
                     <th>Id</th>
