@@ -7,7 +7,8 @@ import { SnotifyToast } from 'vue-snotify/components/SnotifyToast/toast.model';
 export default class FetchStudentsComponent extends Vue {
     students: Student[] = [];
     newStudent  = <Student>{};
-    succesfulAdd: boolean = false;
+    succesfulAdd = false;
+    studentToRemoveIndex =  -1;
     
     mounted() {
         fetch('api/Students/')
@@ -31,19 +32,31 @@ export default class FetchStudentsComponent extends Vue {
             }, () => this.$snotify.error('Oops! Something went wrong.'))
     }
 
-    //TODO: add confirmation
-    removeStudent(index:number){
-        var studentToRemove = this.students[index];
-        fetch('api/students/'+studentToRemove.studentId+'/remove', { 
+    //marks a student for removal
+    //used for confirmation purposes
+    confirmRemove(index:number){
+        this.studentToRemoveIndex = index;
+    }
+
+    //removes the studen marked for removal
+    removeStudent(){
+        fetch('api/students/' + this.studentToRemove.studentId + '/remove', { 
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => res.json() as Promise<number>)
             .then((returnCode) => {
-                this.$snotify.success('The student was removed successfully');
+                this.$snotify.success('The student was deleted successfully');
                 //remove student from view
-                this.students.splice(index,1);
+                this.students.splice(this.studentToRemoveIndex, 1);
             }, () => this.$snotify.error('Oops! Something went wrong.'))
+    }
+
+    get studentToRemove(){
+        var student = this.students[this.studentToRemoveIndex];
+        //this will avoid null errors when loading
+        //the page for the first time and after deleting a user
+        return student == undefined ? <Student>{} : student;
     }
 
     clear(){

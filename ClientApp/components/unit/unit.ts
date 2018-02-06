@@ -76,7 +76,6 @@ export default class UnitComponent extends Vue {
         return this.unit.enrollments.map(obj => ({...obj}));
     }
 
-    //MAYBE: add 
     editEnrollment(index: number){
         this.currentEnrollment = this.unit.enrollments[index];
     }

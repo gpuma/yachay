@@ -7,6 +7,7 @@ export interface Student {
     // used for deciding if user should
     // be enrolled
     enroll: boolean;
+    //TODO: turn this into a class and implement fullname
 }
 
 export interface Unit { 
