@@ -22,10 +22,12 @@ export default class FetchUnitsComponent extends Vue {
         })
             .then(res => res.json() as Promise<Unit>)
             .then(newUnit => {
-                this.units.push(newUnit) 
-                //TODO: clear controls after post HERE
-                return true
-                //TODO: add feedback to user after error
-            }, () => console.log('error papi'))
+                this.$snotify.success('The unit was added successfully');
+                this.units.push(newUnit);
+                this.clear();
+            }, () => this.$snotify.error('Oops! Something went wrong.'))
+    }
+    clear(){
+        this.newUnit = <Unit>{};
     }
 }

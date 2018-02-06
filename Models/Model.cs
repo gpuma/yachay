@@ -20,12 +20,17 @@ namespace yachay.Models
     public class Unit
     {
         public int UnitId { get; set; }
+        [Required]
         [StringLength(100)]
         public string Name { get; set; }
+        [Required]
         [StringLength(50)]
         public string Semester { get; set; }
+        [Required]
         public float Weight1 { get; set; }
+        [Required]
         public float Weight2 { get; set; }
+        [Required]
         public float Weight3 { get; set; }
         public List<Enrollment> Enrollments { get; set; }
     }
