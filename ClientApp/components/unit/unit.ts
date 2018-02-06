@@ -26,8 +26,6 @@ export default class UnitComponent extends Vue {
                 // TODO: check if null would be better
                 this.currentEnrollment = this.unit.enrollments[0];
             });
-        // var child = this.$children.msgbox;
-        // child.hola();
     }
 
     @Watch('unit.enrollments', { deep: true } )

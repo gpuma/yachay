@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 // for Entity Framework
 using yachay.Models;
@@ -30,7 +31,10 @@ namespace yachay
             var connection = @"Server=(localdb)\mssqllocaldb;Database=yachay;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<YachayContext>(options => options.UseSqlServer(connection));
             
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options => {
+                //avoids self-referencing loop error
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

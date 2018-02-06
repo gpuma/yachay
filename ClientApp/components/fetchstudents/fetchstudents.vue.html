@@ -10,6 +10,7 @@
                     <th>Id</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th></th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -18,6 +19,11 @@
                     <td>{{ item.studentId }}</td>
                     <td>{{ item.firstName }}</td>
                     <td>{{ item.lastName }}</td>
+                    <td>
+                        <router-link :to="'/students/' + item.studentId">
+                            View enrollments
+                        </router-link>
+                    </td>
                     <td>
                         <button type="button" @click="removeStudent(index)" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span>

@@ -12,6 +12,7 @@ const routes = [
     { path: '/counter', component: require('./components/counter/counter.vue.html') },
     { path: '/fetchdata', component: require('./components/fetchdata/fetchdata.vue.html') },
     { path: '/students', component: require('./components/fetchstudents/fetchstudents.vue.html') },
+    { path: '/students/:id', component: require('./components/student/student.vue.html') },
     { path: '/units', component: require('./components/fetchunits/fetchunits.vue.html') },
     { path: '/units/:id', component: require('./components/unit/unit.vue.html') },
     { path: '/units/:id/enroll', component: require('./components/enrollstudents/enrollstudents.vue.html') },

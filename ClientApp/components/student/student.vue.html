@@ -1,0 +1,38 @@
+<template>
+    <div>
+        <!-- TODO: get student's name -->
+        <h1>Enrolled units for who?</h1>
+        <p><router-link to="/students/">Go back to all students</router-link></p>
+        <p v-if="enrollments.length==0"><em>No students enrolled in this class.</em></p>
+        <div v-else-if="enrollments">
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Unit Id</th>
+                    <th>Unit Name</th>
+                    <th>Grade 1</th>
+                    <th>Grade 2</th>
+                    <th>Grade 3</th>
+                    <!-- <th>Final Grade</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in enrollments">
+                    <td>{{ item.unit.unitId }}</td>
+                    <td>{{ item.unit.name }}</td>
+                    <td v-if="item.grade1">{{ item.grade1 }}</td>
+                    <td v-else><em>No grade...</em></td>
+                    <td v-if="item.grade2">{{ item.grade2 }}</td>
+                    <td v-else><em>No grade...</em></td>
+                    <td v-if="item.grade3">{{ item.grade3 }}</td>
+                    <td v-else><em>No grade...</em></td>
+                    <!-- <td>{{ formatDecimal(weightedAvg(item), 1) }} </td> -->
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <p v-else><em>Loading...</em></p>
+    </div>
+</template>
+
+<script src="./student.ts"></script>
