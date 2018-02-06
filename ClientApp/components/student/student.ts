@@ -1,18 +1,17 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import { Enrollment} from '../models';
+import { Enrollment, Student } from '../models';
 
 @Component
 export default class StudentComponent extends Vue {
-    
-    enrollments = <Enrollment[]>{};
+    student = <Student>{};
     
     mounted() {
         fetch('api/students/'+this.$route.params.id)
-            .then(response => response.json() as Promise<Enrollment[]>)
+            .then(response => response.json() as Promise<Student>)
             .then(data => {
-                this.enrollments = data;
+                this.student = data;
             });
     }
 }

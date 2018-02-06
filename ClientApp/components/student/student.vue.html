@@ -1,10 +1,9 @@
 <template>
     <div>
-        <!-- TODO: get student's name -->
-        <h1>Enrolled units for who?</h1>
+        <h1>Enrolled units for {{student.firstName + ' ' + student.lastName}}</h1>
         <p><router-link to="/students/">Go back to all students</router-link></p>
-        <p v-if="enrollments.length==0"><em>No students enrolled in this class.</em></p>
-        <div v-else-if="enrollments">
+        <p v-if="student.enrollments.length==0"><em>No students enrolled in this class.</em></p>
+        <div v-else-if="student.enrollments">
         <table class="table table-condensed table-striped">
             <thead>
                 <tr>
@@ -17,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in enrollments">
+                <tr v-for="(item, index) in student.enrollments">
                     <td>{{ item.unit.unitId }}</td>
                     <td>{{ item.unit.name }}</td>
                     <td v-if="item.grade1">{{ item.grade1 }}</td>

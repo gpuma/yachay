@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 using yachay.Models;
 
@@ -26,21 +27,15 @@ namespace yachay.Controllers
         }
 
         [HttpGet("{studentId}")]
-        public IEnumerable<Enrollment> GetEnrollments(int studentId)
+        public Student GetEnrollments(int studentId)
         {
-            //filter first
-            var enrollments = _context.Enrollments.Where(
-                                e => e.StudentId == studentId);
-
-            if (enrollments.Count() != 0)
+            var student = _context.Students.Find(studentId);
+            if (student != null)
             {
-                //then load related entities
-                foreach(var enroll in enrollments)
-                {
-                    _context.Entry(enroll).Reference(e => e.Unit).Load();
-                }
+                _context.Entry(student).Collection(s => s.Enrollments)
+                    .Query().Include(e => e.Unit).Load();
             }
-            return enrollments;
+            return student;
         }
 
         [HttpPost("[action]")]

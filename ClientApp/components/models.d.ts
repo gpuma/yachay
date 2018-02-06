@@ -3,7 +3,9 @@ export interface Student {
     studentId: number;
     firstName: string;
     lastName: string;
-    // used for enrollments
+    enrollments: Enrollment[];
+    // used for deciding if user should
+    // be enrolled
     enroll: boolean;
 }
 

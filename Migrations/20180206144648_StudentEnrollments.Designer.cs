@@ -11,9 +11,10 @@ using yachay.Models;
 namespace yachay.Migrations
 {
     [DbContext(typeof(YachayContext))]
-    partial class YachayContextModelSnapshot : ModelSnapshot
+    [Migration("20180206144648_StudentEnrollments")]
+    partial class StudentEnrollments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

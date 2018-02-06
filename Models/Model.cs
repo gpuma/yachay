@@ -61,6 +61,8 @@ namespace yachay.Models
         [StringLength(50)]
         public string LastName  { get; set; }
 
+        public List<Enrollment> Enrollments { get; set; }
+
         //used for client purposes
         [NotMapped]
         public bool Enroll {get; set; }
