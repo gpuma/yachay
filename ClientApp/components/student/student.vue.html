@@ -2,7 +2,7 @@
     <div>
         <h1>Enrolled units for {{student.firstName + ' ' + student.lastName}}</h1>
         <p><router-link to="/students/">Go back to all students</router-link></p>
-        <p v-if="student.enrollments.length==0"><em>No students enrolled in this class.</em></p>
+        <p v-if="student.enrollments.length==0"><em>This student has no enrollments. You can enroll them using the Units tab</em></p>
         <div v-else-if="student.enrollments">
         <table class="table table-condensed table-striped">
             <thead>
@@ -12,7 +12,8 @@
                     <th>Grade 1</th>
                     <th>Grade 2</th>
                     <th>Grade 3</th>
-                    <!-- <th>Final Grade</th> -->
+                    
+                    <!--TODO: <th>Final Grade</th> -->
                 </tr>
             </thead>
             <tbody>
