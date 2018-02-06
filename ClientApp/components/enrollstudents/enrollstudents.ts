@@ -26,11 +26,10 @@ export default class EnrollStudentsComponent extends Vue {
             .then(res => res.json() as Promise<number>)
             .then(returnCode => {
                 if(returnCode == 0){
-                    //TODO: feedback messages
                     this.students = this.remainingStudents;
-                    console.log('all good b0ss')
+                    this.$snotify.success('Enrollment was successful.');
                 }
-            }, () => console.log('error papi'))
+            }, () => this.$snotify.error('Oops! Something went wrong.'))
     }
 
     get studentsToEnroll(){

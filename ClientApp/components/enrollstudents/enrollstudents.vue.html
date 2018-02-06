@@ -1,7 +1,7 @@
 <template>
     <div>
+        <vue-snotify></vue-snotify>
         <h1>New enrollments</h1>
-
         <p>Select the students you would like to enroll in this unit.</p>
         <p v-if="students.length==0"><em>No students available to enroll.</em></p>
         <div v-else-if="students">

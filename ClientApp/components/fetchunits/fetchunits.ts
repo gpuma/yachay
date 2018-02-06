@@ -27,6 +27,21 @@ export default class FetchUnitsComponent extends Vue {
                 this.clear();
             }, () => this.$snotify.error('Oops! Something went wrong.'))
     }
+
+    //TODO: add confirmation
+    removeUnit(index:number){
+        var unitToRemove = this.units[index];
+        fetch('api/units/'+unitToRemove.unitId+'/remove', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json() as Promise<number>)
+            .then((returnCode) => {
+                this.$snotify.success('The unit was removed successfully');
+                this.units.splice(index,1);
+            }, () => this.$snotify.error('Oops! Something went wrong.'))
+    }
+
     clear(){
         this.newUnit = <Unit>{};
     }

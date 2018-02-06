@@ -12,10 +12,11 @@
                     <th>Name</th>
                     <th>Semester</th>
                     <th></th>
+                    <th>Delete?</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in units">
+                <tr v-for="(item, index) in units">
                     <td>{{ item.unitId }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.semester }}</td>
@@ -23,6 +24,11 @@
                     <router-link :to="'/units/' + item.unitId">
                         View enrollments
                     </router-link>
+                    </td>
+                    <td>
+                        <button type="button" @click="removeUnit(index)" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
                     </td>
                 </tr>
             </tbody>

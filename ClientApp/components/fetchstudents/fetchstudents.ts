@@ -36,7 +36,6 @@ export default class FetchStudentsComponent extends Vue {
         var studentToRemove = this.students[index];
         fetch('api/students/'+studentToRemove.studentId+'/remove', { 
             method: 'POST',
-            body: JSON.stringify(index),
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => res.json() as Promise<number>)

@@ -43,7 +43,6 @@ namespace yachay.Controllers
         [HttpPost("[action]")]
         public int Update([FromBody]Unit unit)
         {
-            //TODO: check this
             if (!ModelState.IsValid)
             {
                 return -1;
@@ -94,6 +93,16 @@ namespace yachay.Controllers
                 select new Enrollment() { UnitId = unitId, StudentId = s.StudentId}
             ).AsEnumerable().ToList();
             _context.Enrollments.AddRange(newEnrollments);
+            _context.SaveChanges();
+            return 0;
+        }
+
+        [HttpPost("{unitId}/[action]")]
+        //we need `FromBody` since this is a complex type
+        public int Remove(int unitId)
+        {
+            var unit = _context.Units.Find(unitId);
+            _context.Remove(unit);
             _context.SaveChanges();
             return 0;
         }
