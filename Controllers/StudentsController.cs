@@ -38,5 +38,15 @@ namespace yachay.Controllers
             _context.SaveChanges();
             return student;
         }
+
+        [HttpPost("{studentId}/[action]")]
+        //we need `FromBody` since this is a complex type
+        public int Remove(int studentId)
+        {
+            var student = _context.Students.Find(studentId);
+            _context.Remove(student);
+            _context.SaveChanges();
+            return 0;
+        }
     }
 }

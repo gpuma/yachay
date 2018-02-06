@@ -10,14 +10,19 @@
                     <th>Id</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <!-- <th>Last Name</th> -->
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in students">
+                <tr v-for="(item, index) in students">
                     <td>{{ item.studentId }}</td>
                     <td>{{ item.firstName }}</td>
                     <td>{{ item.lastName }}</td>
+                    <td>
+                        <button type="button" @click="removeStudent(index)" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

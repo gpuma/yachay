@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { Student } from '../models'
+import { SnotifyToast } from 'vue-snotify/components/SnotifyToast/toast.model';
 
 @Component
 export default class FetchStudentsComponent extends Vue {
@@ -25,13 +26,29 @@ export default class FetchStudentsComponent extends Vue {
             .then(res => res.json() as Promise<Student>)
             .then(newStudent => {
                 this.students.push(newStudent) 
-                //TODO: clear controls after post HERE
-                this.$snotify.success('Example body content', {
-                    timeout: 2000,
-                    showProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true
-                  });
-            }, () => console.log('error papi'))
+                this.$snotify.success('The student was added successfully');
+                this.clear();
+            }, () => this.$snotify.error('Oops! Something went wrong.'))
+    }
+
+    //TODO: add confirmation
+    removeStudent(index:number){
+        var studentToRemove = this.students[index];
+        fetch('api/students/'+studentToRemove.studentId+'/remove', { 
+            method: 'POST',
+            body: JSON.stringify(index),
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json() as Promise<number>)
+            .then((returnCode) => {
+                this.$snotify.success('The student was removed successfully');
+                //remove student from view
+                this.students.splice(index,1);
+            }, () => this.$snotify.error('Oops! Something went wrong.'))
+    }
+
+    clear(){
+        this.newStudent.firstName = '';
+        this.newStudent.lastName = '';
     }
 }
