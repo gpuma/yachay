@@ -39,7 +39,7 @@
         <button type="button" @click="applyChanges()" class="btn btn-success" :disabled="!IsThereChanges">Save changes</button>        
         <button type="button" @click="revertChanges()" class="btn btn-danger" :disabled="!IsThereChanges" >Discard</button>
         <!-- Modal -->
-        <!-- TODO: there's probably a way to modularize this. right now it's a bit ugly and difficult to maintain -->
+        <!-- MAYBE: put this into a component -->
         <div v-if="currentEnrollment" class="modal fade" id="editGradeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
             <div class="modal-content">

@@ -38,7 +38,7 @@ export default class FetchStudentsComponent extends Vue {
         this.studentToRemoveIndex = index;
     }
 
-    //removes the studen marked for removal
+    //removes the student marked for removal
     removeStudent(){
         fetch('api/students/' + this.studentToRemove.studentId + '/remove', { 
             method: 'POST',
@@ -52,6 +52,13 @@ export default class FetchStudentsComponent extends Vue {
             }, () => this.$snotify.error('Oops! Something went wrong.'))
     }
 
+    clear(){
+        this.newStudent.firstName = '';
+        this.newStudent.lastName = '';
+    }
+
+    /*computed properties*/
+
     get studentToRemove(){
         var student = this.students[this.studentToRemoveIndex];
         //this will avoid null errors when loading
@@ -59,8 +66,9 @@ export default class FetchStudentsComponent extends Vue {
         return student == undefined ? <Student>{} : student;
     }
 
-    clear(){
-        this.newStudent.firstName = '';
-        this.newStudent.lastName = '';
+    get inputIsValid(){
+        //checking for an empty string would return true when
+        //´newStudent´ is empty, which would be wrong
+        return this.newStudent.firstName && this.newStudent.lastName;
     }
 }
