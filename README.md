@@ -1,5 +1,5 @@
 # Yachay
-Virtual classroom SPA written on ASP.NET Core, Vue.js and Typescript.
+Blackboard-style SPA written on ASP.NET Core, Vue.js and Typescript.
 
 ## Demo
 - [Video demo](https://youtu.be/66J8GnKnnmg)
